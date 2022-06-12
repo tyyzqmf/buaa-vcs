@@ -26,6 +26,17 @@ if __name__ == '__main__':
     # 执行记录
     history = ""
 
+    # 更新表格数据
+    def updateTableData(apps):
+        data = []
+        index = 1
+        for app in apps:
+            data.append([index, app.type, app.location, app.status])
+            index += 1
+        data.append(["      ", "      ", "      ", "             "])
+        window_main["-智能家具-表-"].update(data)
+
+    # 主流程
     while True:
         window, event, value = sg.read_all_windows()
         if window == window_main and event in (None, sg.WIN_CLOSED):
@@ -44,8 +55,8 @@ if __name__ == '__main__':
             result = cmd.dilivery(apps)
             # 播放执行结果语音
             io.play(result)
+            # 更新表格数据
+            updateTableData(apps)
             # 更新执行记录
             history += f"{result}\n"
             window_main["-执行记录-"].update(history)
-
-
