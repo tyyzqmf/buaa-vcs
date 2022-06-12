@@ -36,6 +36,7 @@ class Command:
         指令下发：根据位置和对象确定指令执行的对象
         """
         # TODO：实现指令下发
+        # mock：临时写死，下发到第一个电器
         exec_result = apps[0].exec(self.action)
         cur = time.localtime()
         cur_time = time.strftime("%Y-%m-%d %H:%M:%S", cur)

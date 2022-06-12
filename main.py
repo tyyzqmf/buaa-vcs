@@ -46,7 +46,7 @@ if __name__ == '__main__':
             io.start()
         elif event == '停止录音':
             io.stop()
-            # 从麦克风获取语音
+            # 获取语音
             words = io.read()
             window_main["-语音识别结果-"].update(words)
             # 指令解析
