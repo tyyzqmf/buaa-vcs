@@ -5,13 +5,11 @@ from wsgiref.simple_server import sys_version
 import pyaudio  # conda安装
 import wave
 import threading
-<<<<<<< HEAD
 from playsound import playsound  # pip安装
 from module.voice import voice
 import pygame
 import os
-=======
->>>>>>> 688663a06ca7cb70d0d34c56703548ad339d6707
+
 
 
 class Recorder:
