@@ -36,6 +36,7 @@ class Recorder:
                 break
             data = stream.read(self.CHUNK)
             wf.writeframes(data)  # 写入数据
+        self.stop_flag = 0    
         stream.stop_stream()  # 关闭流
         stream.close()
         p.terminate()
