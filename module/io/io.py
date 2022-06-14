@@ -4,7 +4,6 @@
 import pyaudio
 import wave
 import threading
-from playsound import playsound
 
 
 class Recorder:
@@ -33,6 +32,7 @@ class Recorder:
 
         for _ in range(0, int(self.RATE * self.max_record_second / self.CHUNK)):
             if self.stop_flag == 1:
+                self.stop_flag = 0
                 break
             data = stream.read(self.CHUNK)
             wf.writeframes(data)  # 写入数据
@@ -77,6 +77,26 @@ def read():
 
     return "打开客厅的电视"
 
+def player(song):
+    chunk = 1024
+    wf = wave.open(song, 'rb')
+    p = pyaudio.PyAudio()
+    stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
+                    channels=wf.getnchannels(),
+                    rate=wf.getframerate(),
+                    output=True)
+
+    data = wf.readframes(chunk)
+
+    while len(data) > 0:
+        stream.write(data)
+        data = wf.readframes(chunk)
+
+    stream.stop_stream()
+    stream.close()
+
+    p.terminate()
+
 
 def play(words):
     """
@@ -85,8 +105,8 @@ def play(words):
     # TODO：语音合成+播放
 
     # 语音播放
-    song = 'F:\\xxx\\temp.wav'  # TODO 改成语音合成后的位置即可（不支持中文路径）
-    playsound(song)
+    song = 'module/io/temp.wav'  # TODO 改成语音合成后的位置即可（不支持中文路径）
+    player(song)
     return
 
 
