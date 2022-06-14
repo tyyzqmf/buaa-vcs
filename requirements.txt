@@ -4,3 +4,4 @@
 pysimplegui
 pyaudio
 playsound
+pygame
