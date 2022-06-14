@@ -1,10 +1,14 @@
 """
 输入输出模块
 """
-import pyaudio
+from wsgiref.simple_server import sys_version
+import pyaudio  # conda安装
 import wave
 import threading
-from playsound import playsound
+from playsound import playsound  # pip安装
+from module.voice import voice
+import pygame
+import os
 
 
 class Recorder:
@@ -12,7 +16,8 @@ class Recorder:
         self.CHUNK = 1024  # 每个缓冲区的帧数
         self.FORMAT = pyaudio.paInt16  # 采样位数
         self.CHANNELS = 1  # 单声道
-        self.RATE = 44100  # 采样频率
+        # self.RATE = 44100  # 采样频率
+        self.RATE = 16000
         self.wave_out_path = 'module/io/temp.wav'  # 只保留最近一个的录入音频
         self.stop_flag = 0
         self.max_record_second = 150  # 最大录制时间（秒）
@@ -36,6 +41,7 @@ class Recorder:
                 break
             data = stream.read(self.CHUNK)
             wf.writeframes(data)  # 写入数据
+        self.stop_flag = 0
         stream.stop_stream()  # 关闭流
         stream.close()
         p.terminate()
@@ -73,22 +79,41 @@ def read():
     """
     从临时录音文件读取语音，并解析成文字
     """
-    # TODO
+    wave_path = 'module/io/temp.wav'
 
-    return "打开客厅的电视"
+    # 读取文件
+    def get_file_content(path):
+        with open(path, 'rb') as fp:
+            return fp.read()
+    
+    # 识别本地文件
+    words = voice.asr(get_file_content(wave_path),format='wav', rate=16000,dev_dict={'dev_pid':1537})
+    
+    # 清掉temp.wav文件
+    if(os.path.exists(wave_path)):
+        os.remove(wave_path)
+        print("文件删除成功")
+        
+    return words
 
 
 def play(words):
     """
     把文字从播放器播出
     """
-    # TODO：语音合成+播放
+    # 语音合成
+    words= '欢迎使用，已打开'           # 获取到执行结果后删除即可
+    result = voice.synthesis(words)
+
+    with open('audio.mp3', 'wb') as f:
+        f.write(result)
 
     # 语音播放
-    song = 'F:\\xxx\\temp.wav'  # TODO 改成语音合成后的位置即可（不支持中文路径）
-    playsound(song)
+    song = 'audio.mp3'  # TODO 改成语音合成后的位置即可（不支持中文路径）
+    # playsound(song)
+    pygame.mixer.init()
+    pygame.mixer.music.load('audio.mp3')  
+    pygame.mixer.music.set_volume(0.5) 
+    pygame.mixer.music.play()
     return
 
-
-if __name__ == '__main__':
-    play(1)
