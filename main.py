@@ -52,7 +52,7 @@ if __name__ == '__main__':
             # 指令解析
             cmd = command.Command(words)
             # 指令下发并执行
-            result = cmd.dilivery(apps)
+            result = cmd.delivery(apps)
             # 播放执行结果语音
             io.play(result)
             # 更新表格数据
