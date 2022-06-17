@@ -230,9 +230,12 @@ class Command:
         """
         指令下发：根据位置和对象确定指令执行的对象
         """
-        # TODO：实现指令下发
-        # mock：临时写死，下发到第一个电器
-        exec_result = apps[0].exec(self.action)
+        exec_result = ""
+        for app in apps:
+            # 通过位置和类型确定指令执行对象
+            if self.location == app.location and self.object_type == app.type:
+                exec_result = app.exec(self.action, self.scale)
+                break
         cur = time.localtime()
         cur_time = time.strftime("%Y-%m-%d %H:%M:%S", cur)
         return f"{cur_time} {exec_result}"
