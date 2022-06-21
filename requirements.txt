@@ -4,4 +4,6 @@
 pysimplegui
 pyaudio
 playsound
+chardet
+baidu-aip
 pygame

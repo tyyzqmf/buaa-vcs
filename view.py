@@ -11,9 +11,9 @@ class VCSView:
         self.data = []
         index = 1
         for app in apps:
-            self.data.append([index, app.type, app.location, app.status])
+            self.data.append([index, app.type, app.location, app.status, app.scale])
             index += 1
-        self.data.append(["      ", "      ", "      ", "             "])
+        self.data.append(["      ", "      ", "      ", "      ", "      "])
 
     # 创建主窗口
     def GetMainWindow(self, ):
@@ -22,7 +22,7 @@ class VCSView:
                           [sg.Table(
                               key='-智能家具-表-',
                               values=self.data,
-                              headings=['序号', '家具', '位置', '状态'],
+                              headings=['序号', '家具', '位置', '状态', '数值'],
                               hide_vertical_scroll=True,
                               auto_size_columns=True,  # 自动调整列宽（根据上面第一次的values默认值为准，update时不会调整）
                               justification='center',  # 字符排列 left right center

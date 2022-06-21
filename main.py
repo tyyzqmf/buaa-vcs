@@ -1,3 +1,5 @@
+from module.appliance.airconditioner import AirConditioner
+from module.appliance.light import Light
 from module.appliance.tv import TV
 from module.command import command
 from module.io import io
@@ -15,6 +17,10 @@ def init():
     """
     apps.append(TV())
     apps.append(TV(location=BEDROOM))
+    apps.append(Light())
+    apps.append(Light(location=BEDROOM))
+    apps.append(AirConditioner())
+    apps.append(AirConditioner(location=BEDROOM))
 
 
 if __name__ == '__main__':
@@ -31,9 +37,9 @@ if __name__ == '__main__':
         data = []
         index = 1
         for app in apps:
-            data.append([index, app.type, app.location, app.status])
+            data.append([index, app.type, app.location, app.status, app.scale])
             index += 1
-        data.append(["      ", "      ", "      ", "             "])
+        data.append(["      ", "      ", "      ", "      ", "      "])
         window_main["-智能家具-表-"].update(data)
 
     # 主流程
@@ -52,11 +58,11 @@ if __name__ == '__main__':
             # 指令解析
             cmd = command.Command(words)
             # 指令下发并执行
-            result = cmd.delivery(apps)
+            result, log = cmd.delivery(apps)
             # 播放执行结果语音
             io.play(result)
             # 更新表格数据
             updateTableData(apps)
             # 更新执行记录
-            history += f"{result}\n"
+            history += f"{log}\n"
             window_main["-执行记录-"].update(history)

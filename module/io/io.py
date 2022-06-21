@@ -11,7 +11,6 @@ import pygame
 import os
 
 
-
 class Recorder:
     def __init__(self):
         self.CHUNK = 1024  # 每个缓冲区的帧数
@@ -98,6 +97,7 @@ def read():
         
     return words
 
+
 def player(song):
     chunk = 1024
     wf = wave.open(song, 'rb')
@@ -124,7 +124,6 @@ def play(words):
     把文字从播放器播出
     """
     # 语音合成
-    words= '欢迎使用，已打开'           # 获取到执行结果后删除即可
     result = voice.synthesis(words)
 
     with open('audio.mp3', 'wb') as f:

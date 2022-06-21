@@ -35,6 +35,8 @@ class Command:
         把语句解析成指令
         例：电视、客厅、关闭
         """
+        if not self.words:
+            return
         print("接收的指令是: ")
         print(self.words)
         dep_data, parent_mapping = self._getDep()
@@ -238,4 +240,4 @@ class Command:
                 break
         cur = time.localtime()
         cur_time = time.strftime("%Y-%m-%d %H:%M:%S", cur)
-        return f"{cur_time} {exec_result}"
+        return exec_result, f"{cur_time} {exec_result}"
