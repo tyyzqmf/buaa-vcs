@@ -74,8 +74,8 @@ class Command:
                     }
                 }
             )
-        # print(data)
-        # print(parent_mapping)
+        print(data)
+        print(parent_mapping)
         return data, parent_mapping
 
     def _getLocation(self, data):
@@ -222,6 +222,9 @@ class Command:
                 if self.object_type in APPS:
                     if scale in SCALES[self.object_type].keys():
                         self.scale = SCALES[self.object_type][scale]
+                    elif scale in SCALES_ACTION_MAPPING.keys():
+                        self.scale = None
+                        self.action = SCALES_ACTION_MAPPING[scale]
                     else:
                         self.scale = "未知模式"
         else:
