@@ -74,8 +74,8 @@ class Command:
                     }
                 }
             )
-        print(data)
-        print(parent_mapping)
+        # print(data)
+        # print(parent_mapping)
         return data, parent_mapping
 
     def _getLocation(self, data):
