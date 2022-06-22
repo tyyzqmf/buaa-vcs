@@ -8,9 +8,21 @@ class ApplianceBase(object):
         self.location = location
         self.scale = scale
         # 操作列表
-        self.cmd_list = {}
+        self.cmd_list = {"设置", '开启', '关闭', '待机'}
         # (状态+指令集，(新状态,部分报告内容))
-        self.cmd_res = {}
+        self.cmd_res = {"开启+设置": ("开启", "已设置为"),
+                        "开启+开启": ("开启", "已处于开启状态"),
+                        "开启+关闭": ("关闭", "已关闭"),
+                        "开启+待机": ("待机", "已设置为待机状态"),
+                        "关闭+设置": ("开启", "已开启，并设置为"),  # 不确定是否合理
+                        "关闭+开启": ("开启", "已开启"),
+                        "关闭+关闭": ("关闭", "已处于关闭状态"),
+                        "关闭+待机": ("待机", "已设置为待机状态"),  # 不确定是否合理
+                        "待机+设置": ("开启", "已开启，并设置为"),  # 不确定是否合理
+                        "待机+开启": ("开启", "已开启"),
+                        "待机+关闭": ("关闭", "已关闭"),
+                        "待机+待机": ("待机", "已处于待机状态")
+                        }
 
     def exec(self, cmd, scale):
         """
@@ -30,4 +42,4 @@ class ApplianceBase(object):
         """
         返回当前状态
         """
-        return f"{self.location}的{self.type}{part_report}{f'{scale}' if scale is not None else ''}"
+        return f"{self.location}的{self.type}{part_report}{scale if scale is not None else ''}"
