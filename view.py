@@ -11,9 +11,9 @@ class VCSView:
         self.data = []
         index = 1
         for app in apps:
-            self.data.append([index, app.type, app.location, app.status, app.scale])
+            self.data.append([index, app.type, app.location, app.status, app.scale if app.scale else ""])
             index += 1
-        self.data.append(["      ", "      ", "      ", "      ", "      "])
+        self.data.append(["      ", "      ", "      ", "      ", "                  "])
 
     # 创建主窗口
     def GetMainWindow(self, ):

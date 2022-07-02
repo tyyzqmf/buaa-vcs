@@ -2,6 +2,7 @@ class ApplianceBase(object):
     """
         ApplianceBase: 家电基类
     """
+
     def __init__(self, type, status, location, scale=None):
         self.type = type
         self.status = status

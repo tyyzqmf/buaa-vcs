@@ -37,9 +37,9 @@ if __name__ == '__main__':
         data = []
         index = 1
         for app in apps:
-            data.append([index, app.type, app.location, app.status, app.scale])
+            data.append([index, app.type, app.location, app.status, app.scale if app.scale else ""])
             index += 1
-        data.append(["      ", "      ", "      ", "      ", "      "])
+        data.append(["      ", "      ", "      ", "      ", "                  "])
         window_main["-智能家具-表-"].update(data)
 
     # 主流程
