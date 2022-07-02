@@ -7,3 +7,4 @@ playsound
 chardet
 baidu-aip
 pygame
+pyinstaller

@@ -18,7 +18,7 @@ class Recorder:
         self.CHANNELS = 1  # 单声道
         # self.RATE = 44100  # 采样频率
         self.RATE = 16000
-        self.wave_out_path = 'module/io/temp.wav'  # 只保留最近一个的录入音频
+        self.wave_out_path = 'temp.wav'  # 只保留最近一个的录入音频
         self.stop_flag = 0
         self.max_record_second = 150  # 最大录制时间（秒）
 
