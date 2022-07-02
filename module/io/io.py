@@ -80,7 +80,7 @@ def read():
     """
     从临时录音文件读取语音，并解析成文字
     """
-    wave_path = 'module/io/temp.wav'
+    wave_path = 'temp.wav'
 
     # 读取文件
     def get_file_content(path):
